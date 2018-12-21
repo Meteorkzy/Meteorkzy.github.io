@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Eclipse是一款被广泛应用的开发工具，最初它是为编写Java程序而设计的，但由于它良好的架构并作为开源软件来发行，有很多的公司和个人以它为基础开发了插件，使得Eclipse有了越来越丰富的功能。 CDT (C/C++ Development Tooling)是Eclipse的一个插件，它为Eclipse提供了开发C/C++项目的支持，大家可以用它来编写自己的程序。 下面简单介绍一下Eclips">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Eclipse作为C语言IDE的简单笔记，转载">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Eclipse是一款被广泛应用的开发工具，最初它是为编写Java程序而设计的，但由于它良好的架构并作为开源软件来发行，有很多的公司和个人以它为基础开发了插件，使得Eclipse有了越来越丰富的功能。 CDT (C/C++ Development Tooling)是Eclipse的一个插件，它为Eclipse提供了开发C/C++项目的支持，大家可以用它来编写自己的程序。 下面简单介绍一下Eclips">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307222712156.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307222934829.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307223127283.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307223253330.jpg">
+<meta property="og:updated_time" content="2018-12-21T14:26:47.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Eclipse作为C语言IDE的简单笔记，转载">
+<meta name="twitter:description" content="Eclipse是一款被广泛应用的开发工具，最初它是为编写Java程序而设计的，但由于它良好的架构并作为开源软件来发行，有很多的公司和个人以它为基础开发了插件，使得Eclipse有了越来越丰富的功能。 CDT (C/C++ Development Tooling)是Eclipse的一个插件，它为Eclipse提供了开发C/C++项目的支持，大家可以用它来编写自己的程序。 下面简单介绍一下Eclips">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307222712156.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/">
+
+
+
+
+
+  <title>用Eclipse作为C语言IDE的简单笔记，转载 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用Eclipse作为C语言IDE的简单笔记，转载</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T21:55:49+08:00">
+                2018-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Eclipse是一款被广泛应用的开发工具，最初它是为编写Java程序而设计的，但由于它良好的架构并作为开源软件来发行，有很多的公司和个人以它为基础开发了插件，使得Eclipse有了越来越丰富的功能。</p>
+<p>CDT (C/C++ Development Tooling)是Eclipse的一个插件，它为Eclipse提供了开发C/C++项目的支持，大家可以用它来编写自己的程序。</p>
+<p>下面简单介绍一下Eclipse CDT的安装和使用方法。</p>
+<h2 id="Eclipse-的安装"><a href="#Eclipse-的安装" class="headerlink" title="Eclipse 的安装"></a>Eclipse 的安装</h2><p>Eclipse 是用 Java 语言编写的软件，要运行它，就必须首先安装Java虚拟机软件。要开发C语言的程序，就必须有C语言的Toolchain(编译器、链接器、调试器等各种系统工具)，Eclipse中并不提供这些功能，我们需要单独安装。</p>
+<h2 id="安装-Java-虚拟机"><a href="#安装-Java-虚拟机" class="headerlink" title="安装 Java 虚拟机"></a>安装 Java 虚拟机</h2><h3 id="Win32"><a href="#Win32" class="headerlink" title="Win32"></a>Win32</h3><p>从校内FTP服务器10.1.0.155下载Java虚拟机，并运行安装。</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Ubuntu Linux 中已经带有 Java 虚拟机，执行命令：</p>
+<p>apt-get install sun-java6-jdk<br>便可以安装。</p>
+<h2 id="安装-Toolchain-编译器、链接器和调试器"><a href="#安装-Toolchain-编译器、链接器和调试器" class="headerlink" title="安装 Toolchain (编译器、链接器和调试器)"></a>安装 Toolchain (编译器、链接器和调试器)</h2><h4 id="Win32-1"><a href="#Win32-1" class="headerlink" title="Win32"></a>Win32</h4><p>在Windows上，我们可以使用GNU为我们提供的Toolchain，其中一个比较容易使用的版本是MinGW，它包括了GNU GCC、binutils、gdb等工具包。</p>
+<p>可以从<a href="ftp://10.1.0.155/pub/Develop/IDE/Eclipse.CDT/mingw.exe下载，下载后执行，并将它们解压到C盘根目录中。注意，必须是C盘的根目录，不要吝惜你的C盘，编译器这样重要的东西绝对有必要放在上面。解压后，MinGW即被安装在C:\mingw内。" target="_blank" rel="noopener">ftp://10.1.0.155/pub/Develop/IDE/Eclipse.CDT/mingw.exe下载，下载后执行，并将它们解压到C盘根目录中。注意，必须是C盘的根目录，不要吝惜你的C盘，编译器这样重要的东西绝对有必要放在上面。解压后，MinGW即被安装在C:\mingw内。</a></p>
+<p>如果你希望能够从命令行启动gcc等程序，可以修改PATH，并将C:\mingw\bin加入其中。</p>
+<h4 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h4><p>大多数的Linux系统都会安装有GNU的Toolchain，在Ubuntu Linux上，如果你的系统没有安装，请使用命令</p>
+<p>apt-get install build-essential<br>来安装。</p>
+<h2 id="安装-Eclipse-For-C-C"><a href="#安装-Eclipse-For-C-C" class="headerlink" title="安装 Eclipse For C/C++"></a>安装 Eclipse For C/C++</h2><p>从<a href="ftp://10.1.0.155/pub/Develop/IDE/Eclipse.CDT/下载跟自己的系统相对应的版本，并解压到磁盘上即可，不需要特殊的安装程序。这个版本的Eclipse，并未包含开发Java的功能。" target="_blank" rel="noopener">ftp://10.1.0.155/pub/Develop/IDE/Eclipse.CDT/下载跟自己的系统相对应的版本，并解压到磁盘上即可，不需要特殊的安装程序。这个版本的Eclipse，并未包含开发Java的功能。</a></p>
+<h2 id="运行Eclipse"><a href="#运行Eclipse" class="headerlink" title="运行Eclipse"></a>运行Eclipse</h2><p>在安装好Eclipse之后，执行该目录中的eclipse.exe和eclipse文件即可开启它。由于Eclipse是一个功能非常丰富的系统，启动它会需要一些时间，特别是在配置比较低的电脑上</p>
+<h3 id="选择Workspace"><a href="#选择Workspace" class="headerlink" title="选择Workspace"></a>选择Workspace</h3><p>Eclipse一旦运行，便会弹出一个窗口，要求用户选择一个工作空间(Workspace)，在Eclipse运行之后，所有的项目和文件缺省情况下都会存储在这个工作空间中，并且我们对Eclipse进行的任何设置也都是和Workspace相关联的。因此除非有特别的需要，没有什么必要经常切换工作空间。</p>
+<p>选择好后点确定键，Eclipse会继续启动进程。</p>
+<h3 id="Eclipse窗口的组成"><a href="#Eclipse窗口的组成" class="headerlink" title="Eclipse窗口的组成"></a>Eclipse窗口的组成</h3><p>Eclipse的窗口由很多个部分组成，其中每一个部分称为一个View，而将一些View按照一定的布局组合在一起，则称为一个Perspective。每个View都有自己的功能，而不同的Perspective则通常适用于不同的工作。譬如”C/C++”这个Perspective通常用来做C/C++的开发，而”Debug”这个Perspective通常用来做Debug。</p>
+<p>在屏幕的左上角，菜单的下面有按钮可以切换Perspective，同样，在Eclipse的菜单中也有项目专门用来做同样的事情。</p>
+<h2 id="开发C语言程序"><a href="#开发C语言程序" class="headerlink" title="开发C语言程序"></a>开发C语言程序</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>与TC开发不同，在Eclipse中开发程序，必须首先创建一个项目，然后才能在这个项目中编写自己的程序。否则即便编写了程序也没有办法编译、运行。创建项目的步骤如下：</p>
+<ol>
+<li>File | New | Project 见图<img src="/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307222712156.jpg"></li>
+<li><p>输入项目的名字，注意不要使用中文，这可能导致一些奇怪的问题</p>
+</li>
+<li><p>在Project Types中选择 Hello World ANSI C Project，这个类型的项目对于我们的程序设计课程是很合适的，见图</p>
+<img src="/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307222934829.jpg">
+</li>
+</ol>
+<ol start="4">
+<li>点击Finish按钮</li>
+</ol>
+<p>这时在项目列表中就会看到新创建的项目。</p>
+<h3 id="打开源文件"><a href="#打开源文件" class="headerlink" title="打开源文件"></a>打开源文件</h3><p>展开项目内容列表，会发现其中有src目录，展开该目录，可以看到一个与项目同名的C文件，双击这个文件即可看到Eclipse为我们生成的一个很简单的Hello World程序。我们可以直接对其进行修改，编写自己的程序。<br><img src="/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307223127283.jpg"></p>
+<h3 id="编辑源文件"><a href="#编辑源文件" class="headerlink" title="编辑源文件"></a>编辑源文件</h3><p>编辑源文件并不困难，Eclipse会将代码用多种颜色显示代码，并且会在文件编辑的过程中为我们维护代码缩进。除此以外，Eclipse还为程序员编写源代码提供了很多方便的功能，代码代码重排版就是其中的一个。</p>
+<h3 id="代码重排版"><a href="#代码重排版" class="headerlink" title="代码重排版"></a>代码重排版</h3><p>在编写代码的过程中，由于各种的原因，代码的格式会发生变化，会混乱，不再符合我们课程提供的要求。这时，可以使用代码重排版直接调整代码的格式。具体的操作步骤为：</p>
+<p>Ctrl-A选择全部源代码<br>Ctrl-Shift-F对代码进行重排版<br>排版之后的格式基本上是符合我们的要求的，同时看起来也会更清晰。</p>
+<h3 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h3><p>编写好代码之后，在执行程序之前首先是编译链接，在Eclipse中，这个步骤称为Build Project。点击工具栏上的锤子图标，如下图中(1)所示</p>
+<img src="/2018/12/21/用Eclipse作为C语言IDE的简单笔记，转载/20170307223253330.jpg">
+<p>在Build时，若程序中有错误，Eclipse会将它显示出来。行首的红色或者黄色标记分别表示错误和警告，如图中(2)所示。错误的具体原因，会显示在屏幕的下方，如图中(3)所示。</p>
+<p>如果有错误，Eclipse是不能生成最终的可执行文件的，在执行程序前，必须要修正所有的错误。</p>
+<p>修改过源代码之后，Eclipse不会自动重新Build该项目，需要我们手工执行该操作，可以再次点击工具栏上的锤子型图标，也可以使用快捷键ctrl-b。</p>
+<h3 id="执行程序"><a href="#执行程序" class="headerlink" title="执行程序"></a>执行程序</h3><p>若Build Project成功，则可以运行程序。点击工具栏上的绿色Play图标或按快捷键“Ctrl-F11”即可运行程序。运行程序后，输入和输出都将在源代码编辑窗口下方的ConsoleView中进行，最简单的方法是把网页上的输入内容直接复制粘贴到Console中。</p>
+<h3 id="调试-C-语言程序"><a href="#调试-C-语言程序" class="headerlink" title="调试 C 语言程序"></a>调试 C 语言程序</h3><h4 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h4><p>调试程序和执行程序不同，调试程序时我们可以使用断点、单步执行、Watch等工具来查看程序的运行状态。在Eclipse中可以直接使用GDB来调试程序，点击工具栏上的“虫子”按钮或者按快捷键“F11”便可以调试过程。</p>
+<h4 id="调试视图"><a href="#调试视图" class="headerlink" title="调试视图"></a>调试视图</h4><p>开始调试后，系统会弹出一个窗口并建议我们切换的调试视图，这时可以点击“Yes”。调试视图与编码视图不同，主要是在代码上方显示出了正在执行的进程和当前函数中自动变量的值。</p>
+<h4 id="监视变量的值"><a href="#监视变量的值" class="headerlink" title="监视变量的值"></a>监视变量的值</h4><p>有时我们要监视的变量的值并没有直接显示出来，这时我们可以让它在Expression视图中来显示。</p>
+<h4 id="Step-Into-与-Step-Over"><a href="#Step-Into-与-Step-Over" class="headerlink" title="Step Into 与 Step Over"></a>Step Into 与 Step Over</h4><p>单步执行，就是每次执行一行程序，执行完这一行程序后，调试器会将程序执行暂停，这时我们就可以去查看变量的值。</p>
+<p>Step Into与Step Over都是单步执行，其差别在于当我们定义了一个函数，并在调用该函数的语句行上单步执行时，是进入到函数的内部还是将函数作为一个整体来执行。对于标准库函数如printf和scanf等，即便是使用Step Into，Eclipse也不会对这个函数进行单步执行。</p>
+<h4 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h4><p>单步执行虽然可以让我们监控到程序每一步的状态，但对于比较大比较长的程序来说，一步一步运行未免太浪费时间。这时我们可以使用断点功能，让程序在某个指定的位置停止下来，而不是每运行一行都停下来。</p>
+<p>当程序的执行在断点处停下来后，要使其继续运行，可以使用“Resume”功能。</p>
+<h4 id="终止调试"><a href="#终止调试" class="headerlink" title="终止调试"></a>终止调试</h4><p>Eclipse可以同时调试多个程序，为了避免占用太多的资源，当发现了程序中的错误后，就应该终止调试。如果不将它们终止，这些被调试的程序所占用的资源也就不能被释放，会使系统的速度变得很慢。</p>
+<hr>
+<p>作者：5fai<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/faihung/article/details/60780646" target="_blank" rel="noopener">https://blog.csdn.net/faihung/article/details/60780646</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/这两天的一些笔记还有ideas/" rel="next" title="这两天的一些笔记还有ideas">
+                <i class="fa fa-chevron-left"></i> 这两天的一些笔记还有ideas
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eclipse-的安装"><span class="nav-number">1.</span> <span class="nav-text">Eclipse 的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Java-虚拟机"><span class="nav-number">2.</span> <span class="nav-text">安装 Java 虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Win32"><span class="nav-number">2.1.</span> <span class="nav-text">Win32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Toolchain-编译器、链接器和调试器"><span class="nav-number">3.</span> <span class="nav-text">安装 Toolchain (编译器、链接器和调试器)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Win32-1"><span class="nav-number">3.0.1.</span> <span class="nav-text">Win32</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux-1"><span class="nav-number">3.0.2.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Eclipse-For-C-C"><span class="nav-number">4.</span> <span class="nav-text">安装 Eclipse For C/C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行Eclipse"><span class="nav-number">5.</span> <span class="nav-text">运行Eclipse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择Workspace"><span class="nav-number">5.1.</span> <span class="nav-text">选择Workspace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eclipse窗口的组成"><span class="nav-number">5.2.</span> <span class="nav-text">Eclipse窗口的组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发C语言程序"><span class="nav-number">6.</span> <span class="nav-text">开发C语言程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建项目"><span class="nav-number">6.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开源文件"><span class="nav-number">6.2.</span> <span class="nav-text">打开源文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑源文件"><span class="nav-number">6.3.</span> <span class="nav-text">编辑源文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码重排版"><span class="nav-number">6.4.</span> <span class="nav-text">代码重排版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build"><span class="nav-number">6.5.</span> <span class="nav-text">Build</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行程序"><span class="nav-number">6.6.</span> <span class="nav-text">执行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试-C-语言程序"><span class="nav-number">6.7.</span> <span class="nav-text">调试 C 语言程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始调试"><span class="nav-number">6.7.1.</span> <span class="nav-text">开始调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试视图"><span class="nav-number">6.7.2.</span> <span class="nav-text">调试视图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监视变量的值"><span class="nav-number">6.7.3.</span> <span class="nav-text">监视变量的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-Into-与-Step-Over"><span class="nav-number">6.7.4.</span> <span class="nav-text">Step Into 与 Step Over</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置断点"><span class="nav-number">6.7.5.</span> <span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终止调试"><span class="nav-number">6.7.6.</span> <span class="nav-text">终止调试</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
